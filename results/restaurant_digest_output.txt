@@ -1,0 +1,26 @@
+frames sampled: 36  cameras offline: ['cam-patio']
+dry-run email written: digest-1800.eml (not sent)
+audit entries: 8  chain valid: True
+Subject: [Peachtree Ember Kitchen, Atlanta (fictional)] Hourly digest 18:00-19:00: 3 alert(s)
+Hourly digest for Peachtree Ember Kitchen, Atlanta (fictional) (synthetic data)
+Window: 18:00-19:00
+
+ALERTS (a manager must review; these are not accusations):
+  ! 18:25 cash_drawer in lane-1, score 0.682: base risk for cash_drawer: 0.45; +0.30 for 2 linked till event(s); x0.91 detector confidence
+  ! 18:35 spill in dining-room, score 0.522: base risk for spill: 0.60; x0.87 detector confidence
+  ! 18:45 crowding in lane-1, score 0.279: base risk for crowding: 0.30; x0.93 detector confidence
+
+CAMERAS OFFLINE: cam-patio
+
+back-door (3):
+  - 18:05 back-door door opened
+  - 18:05 back-door: 1 person(s) carried 2 box(es) out
+  - 18:55 back-door door opened
+dining-room (2):
+  - 18:15 dining-room: 6 guests waiting for a table
+  - 18:35 dining-room: liquid on floor
+lane-1 (2):
+  - 18:25 lane-1: cash drawer open with no customer
+  - 18:45 lane-1: queue of 8
+
+No faces are recognised. People are shown blurred. Audio is off unless enabled.
