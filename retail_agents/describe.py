@@ -48,6 +48,7 @@ TEMPLATES = {
     "zone_empty": "{zone}: nobody at station for {empty_s}s",
     "vehicle": "{zone}: vehicle stopped {stopped_s}s",
     "table_wait": "{zone}: {count} guests waiting for a table",
+    "scene_count": "{zone}: {persons} person(s), {vehicles} vehicle(s), {bags} bag(s) visible",
 }
 
 

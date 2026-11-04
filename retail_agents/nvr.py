@@ -105,7 +105,7 @@ class RtspSource:
 
 
 class FolderSource:
-    """Reads clips from an NVR export folder. Expects names like <camera>_<unix_ts>.mp4."""
+    """Reads clips from an NVR export folder. Expects names like <camera>_<unix_ts>.mp4; other cameras are skipped."""
 
     def __init__(self, cam: CameraConfig):
         self.cam = cam
@@ -117,12 +117,27 @@ class FolderSource:
         out = []
         for p in sorted(root.glob("*.mp4")):
             try:
-                ts = int(p.stem.rsplit("_", 1)[1])
-            except (IndexError, ValueError):
+                cam, ts_s = p.stem.rsplit("_", 1)
+                ts = int(ts_s)
+            except ValueError:
+                continue
+            if cam != self.cam.name:
                 continue
             if start_ts <= ts < end_ts:
                 out.append(Frame(self.cam.name, self.cam.zone, ts, str(p)))
         return out
+
+
+def sample_clip(clip: Frame, every_s: int, out_dir: str, runner=subprocess.run) -> list[Frame]:
+    """Extract 1 frame every `every_s` seconds from an exported clip with ffmpeg (audio ignored)."""
+    dest = Path(out_dir) / Path(clip.ref).stem
+    dest.mkdir(parents=True, exist_ok=True)
+    res = runner(["ffmpeg", "-v", "error", "-y", "-i", clip.ref, "-an", "-vf", f"fps=1/{every_s}",
+                  str(dest / "f_%05d.jpg")], capture_output=True)
+    if res.returncode != 0:
+        raise CameraOffline(f"{clip.camera}: could not decode {Path(clip.ref).name}")
+    return [Frame(clip.camera, clip.zone, clip.ts + i * every_s, str(f))
+            for i, f in enumerate(sorted(dest.glob("f_*.jpg")))]
 
 
 class SimulatedSource:

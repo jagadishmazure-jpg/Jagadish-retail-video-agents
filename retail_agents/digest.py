@@ -20,8 +20,8 @@ class Digest:
 
 
 class HourlyDigestAgent:
-    def __init__(self, audit: AuditLog, site: str, store_open=(10, 0)):
-        self.audit, self.site, self.store_open = audit, site, store_open
+    def __init__(self, audit: AuditLog, site: str, store_open=(10, 0), data_label: str = "synthetic data"):
+        self.audit, self.site, self.store_open, self.data_label = audit, site, store_open, data_label
 
     def build(self, start_ts: int, end_ts: int, events: list[TextEvent], incidents: list[Incident],
               offline: list[str] | None = None) -> Digest:
@@ -31,7 +31,7 @@ class HourlyDigestAgent:
                         key=lambda i: -i.score)
         span = f"{clock(self.store_open, start_ts)}-{clock(self.store_open, end_ts)}"
         subject = f"[{self.site}] Hourly digest {span}: {len(alerts)} alert(s)"
-        lines = [f"Hourly digest for {self.site} (synthetic data)", f"Window: {span}", ""]
+        lines = [f"Hourly digest for {self.site} ({self.data_label})", f"Window: {span}", ""]
         if alerts:
             lines.append("ALERTS (a manager must review; these are not accusations):")
             for i in alerts:

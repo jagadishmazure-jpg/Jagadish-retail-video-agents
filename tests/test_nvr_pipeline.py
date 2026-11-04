@@ -173,9 +173,9 @@ class DigestTests(unittest.TestCase):
         self.assertIn("not accusations", d.text)
 
     def test_pii_redacted_and_html_escaped(self):
-        ev = [TextEvent(1, "z", "c", "visual", "<b> mail x@y.com")]
+        ev = [TextEvent(1, "z", "c", "visual", "<b> mail x@example.invalid")]
         d = self.agent().build(0, 3600, ev, [])
-        self.assertNotIn("x@y.com", d.text)
+        self.assertNotIn("x@example.invalid", d.text)
         self.assertIn("&lt;b&gt;", d.html)
 
     def test_offline_listed(self):

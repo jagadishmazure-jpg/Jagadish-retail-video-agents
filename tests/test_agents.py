@@ -231,8 +231,8 @@ class ReportTests(unittest.TestCase):
 
 class GuardrailTests(unittest.TestCase):
     def test_redact(self):
-        s = redact("call 313-555-0199 or a@b.com ssn 123-45-6789 card 4111 1111 1111 1111")
-        for raw in ["313-555-0199", "a@b.com", "123-45-6789", "4111"]:
+        s = redact("call 313-555-0199 or a@example.invalid ssn 123-45-6789 card 4111 1111 1111 1111")
+        for raw in ["313-555-0199", "a@example.invalid", "123-45-6789", "4111"]:
             self.assertNotIn(raw, s)
 
     def test_biometric_ok(self):
@@ -257,7 +257,7 @@ class GuardrailTests(unittest.TestCase):
 class AuditTests(unittest.TestCase):
     def test_chain_and_tamper(self):
         a = AuditLog()
-        a.append("x", "y", "email me at a@b.com")
+        a.append("x", "y", "email me at a@example.invalid")
         a.append("x", "z", "ok")
         self.assertTrue(a.verify())
         self.assertIn("[EMAIL]", a.entries[0]["detail"])

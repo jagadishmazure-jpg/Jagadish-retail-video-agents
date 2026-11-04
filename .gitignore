@@ -3,3 +3,10 @@ __pycache__/
 .venv/
 outbox/
 .env
+data/samples/
+.env
+.env.*
+*.onnx
+*.mp4
+*.webm
+.venv/
