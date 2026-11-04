@@ -62,7 +62,7 @@ class EmailSender:
 
     def send(self, d: Digest, stamp: str) -> str:
         if self.dry_run:
-            cfg_to = self.config.to if self.config else ("manager@example.invalid",)
+            cfg_to = self.config.to if self.config else (tuple(a.strip() for a in os.environ.get("DIGEST_TO", "").split(",") if a.strip()) or ("manager@example.invalid",))
             msg = to_message(d, "digest@example.invalid", cfg_to)
             self.outbox.mkdir(parents=True, exist_ok=True)
             path = self.outbox / f"digest-{stamp}.eml"
