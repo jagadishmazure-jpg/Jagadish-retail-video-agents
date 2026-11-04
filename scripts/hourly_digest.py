@@ -9,8 +9,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from retail_agents.restaurant_demo import run  # noqa: E402
-from retail_agents.scheduler import run_loop  # noqa: E402
+from retail_agents.restaurant_demo import run
+from retail_agents.scheduler import run_loop
 
 
 def job(_now=None):
