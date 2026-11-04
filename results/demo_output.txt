@@ -1,0 +1,31 @@
+detector events: 15  pos events: 24  incidents: 14
+  I001 concealment            aisle-5           status=cleared         score=0.546 links=0
+  I002 sweethearting          lane-2            status=confirmed_theft score=0.63 links=2
+  I003 unscanned_item         lane-3            status=logged          score=0.352 links=0
+  I004 unscanned_item         lane-3            status=duplicate       score=0.0 links=0
+  I005 after_hours_intrusion  backroom          status=needs_review    score=0.651 links=0
+  I006 loitering              entrance          status=logged          score=0.16 links=0
+  I007 crowding               lane-1            status=needs_review    score=0.285 links=0
+  I008 spill                  aisle-2           status=needs_review    score=0.534 links=0
+  I009 person_down            aisle-7           status=needs_review    score=0.828 links=0
+  I010 unattended_zone        pharmacy-counter  status=logged          score=0.291 links=0
+  I011 cash_drawer            lane-4            status=needs_review    score=0.675 links=2
+  I012 restricted_vehicle     fire-lane         status=logged          score=0.348 links=0
+  I013 concealment            aisle-5           status=suppressed      score=0.0 links=0
+  I014 spill                  entrance          status=suppressed      score=0.0 links=0
+gate denials: ['no approval', 'token already used']
+Daily summary for Northbrook Corner Market, store 12 (fictional) (synthetic data)
+- Incidents found: 14
+- Waiting for a manager: 5
+- Confirmed theft by a manager: 1
+- Cleared by a manager: 1
+- Logged only (low risk): 4
+- Hidden as duplicates: 1
+- Hidden as likely false alarms: 2
+Safety first: crowding in lane-1; spill in aisle-2; person_down in aisle-7
+Check I009: person_down in aisle-7, score 0.828 (base risk for person_down: 0.90; x0.92 detector confidence)
+Check I011: cash_drawer in lane-4, score 0.675 (base risk for cash_drawer: 0.45; +0.30 for 2 linked till event(s); x0.90 detector confidence)
+Check I005: after_hours_intrusion in backroom, score 0.651 (base risk for after_hours_intrusion: 0.70; x0.93 detector confidence)
+No one is accused by this system. Only a manager can label theft.
+clips purged by retention: 1
+audit entries: 11  chain valid: True

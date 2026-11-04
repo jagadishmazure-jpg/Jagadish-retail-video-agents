@@ -1,0 +1,10 @@
+[project]
+name = "retail-video-agents"
+version = "0.1.0"
+description = "Local, offline, synthetic retail video loss-prevention agents with a human review gate"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
